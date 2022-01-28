@@ -220,7 +220,7 @@ export default function PaginaDoChat() {
                                                 </Text>
                                                 <Text
                                                     styleSheet={{
-                                                        // fontSize: '15px',
+                                                        fontSize: '10px',
                                                         marginLeft: '8px',
                                                         color: appConfig.theme.colors.neutrals[300],
                                                     }}
