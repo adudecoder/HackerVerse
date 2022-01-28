@@ -188,7 +188,7 @@ export default function PaginaDoChat() {
                                         styleSheet={{
                                             borderRadius: '5px',
                                             padding: '6px',
-                                            fontSize: '20px',
+                                            // fontSize: '20px',
                                             marginBottom: '12px',
                                             wordWrap: 'break-word',
                                             hover: {
@@ -220,7 +220,7 @@ export default function PaginaDoChat() {
                                                 </Text>
                                                 <Text
                                                     styleSheet={{
-                                                        fontSize: '15px',
+                                                        // fontSize: '15px',
                                                         marginLeft: '8px',
                                                         color: appConfig.theme.colors.neutrals[300],
                                                     }}
@@ -274,7 +274,7 @@ export default function PaginaDoChat() {
                                 type="textarea"
                                 styleSheet={{
                                     width: '100%',
-                                    fontSize: '25px',
+                                    // fontSize: '25px',
                                     border: '0',
                                     resize: 'none',
                                     borderRadius: '5px',
