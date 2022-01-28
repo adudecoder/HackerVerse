@@ -3,6 +3,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import appConfig from '../config.json';
 
+
 function Titulo(props) {
     const Tag = props.tag;
     return (
@@ -38,6 +39,7 @@ export default function PaginaInicial() {
     // const username = 'adudecoder';
     const [username, setUsername] = React.useState('adudecoder');
     const roteamento = useRouter();
+    const userNameLoading = 'LOADING';
   
     return (
       <>
@@ -154,7 +156,11 @@ export default function PaginaInicial() {
                   borderRadius: '50%',
                   marginBottom: '16px',
                 }}
-                src={`https://github.com/${username}.png`}
+                src={
+                  username.length > 2
+                  ?  `https://github.com/${username}.png`
+                  :  `https://www.nrecosite.com/img/img-loading.gif`
+                }
               />
               <Text
                 variant="body4"
@@ -166,6 +172,7 @@ export default function PaginaInicial() {
                 }}
               >
                 {username}
+                {/* {userNameLoading} */}
               </Text>
             </Box>
             {/* Photo Area */}
