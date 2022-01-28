@@ -70,4 +70,4 @@ Projeto de discord da imersão @alura com @omariosouto e @peas
 * [Supabase](https://supabase.com/)
 * [Vercel para deploy](https://vercel.com/login?next=%2Fdashboard)
 
-![HackerVerse](public/gif/2022-01-28 08-52-50.gif)
+![](/public/gif/2022-01-28 08-52-50.gif)
