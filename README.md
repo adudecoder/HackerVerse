@@ -1,4 +1,4 @@
-# Aluracord Matrix
+# HackerVerse
 Projeto de discord da imersão @alura com @omariosouto e @peas
 
 ## Tecnologias usadas
