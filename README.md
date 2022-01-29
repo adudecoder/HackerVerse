@@ -1,3 +1,5 @@
+![GitHub](https://img.shields.io/github/license/adudecoder/HackerVerse)
+
 # HackerVerse
 Projeto de discord da imersão @alura com @omariosouto e @peas
 
