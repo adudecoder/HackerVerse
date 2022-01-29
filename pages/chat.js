@@ -2,6 +2,8 @@ import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import React from 'react';
 import appConfig from '../config.json';
 import { createClient } from '@supabase/supabase-js';
+import { useRouter } from 'next/router';
+import { ButtonSendSticker } from '../src/components/ButtonSendStickers';
 
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzI4NDIyMCwiZXhwIjoxOTU4ODYwMjIwfQ.OtwcG-x8ozPvfoDVYFkWMChZHtTUBKn0hs6bsfssWs8';
 const SUPABASE_URL = 'https://bfhmjioqifqfpwpzxesx.supabase.co';
@@ -31,12 +33,33 @@ function Header() {
     )
 }
 
-
-
+function escutaMensagensEmTempoReal(adicionaMensagem) {
+    return supabaseClient
+        .from('mensagens')
+        .on('INSERT', (respostaLive) => {
+            adicionaMensagem(respostaLive.new);
+        })
+        .subscribe();
+}
 
 export default function PaginaDoChat() {
+    const roteamento = useRouter();
+    const usuarioLogado = roteamento.query.username;
+    // console.log('usuario logado', usuarioLogado);
+    // console.log('roteamento.query', roteamento.query);
     const [mensagem, setMensagem] = React.useState('');
-    const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
+    const [listaDeMensagens, setListaDeMensagens] = React.useState([
+        // {  
+        //     id: 1,
+        //     de: 'adudecoder',
+        //     texto: ':sticker: https://c.tenor.com/TKpmh4WFEsAAAAAC/alura-gaveta-filmes.gif',
+        // },
+        // {  
+        //     id: 2,
+        //     de: 'peas',
+        //     texto: 'O ternario é triste',
+        // }
+    ]);
     const [isLoaded, setIsLoaded] = React.useState(false);
     const usuario = appConfig.username;
 
@@ -53,10 +76,10 @@ export default function PaginaDoChat() {
                     );
                     setListaDeMensagens(apagarElementoLista);
                     setIsLoaded(true);
-                    window.alert('Mensagem excluída!.');
+                    window.alert('Message deleted!.');
                 })
         } else {
-            window.alert('Você não pode excluir mensagens de outros usuários!')
+            window.alert('You cannot delete messages from other users!')
         }
     };
 
@@ -67,10 +90,23 @@ export default function PaginaDoChat() {
             .select('*')
             .order('id', { ascending: false })
             .then(({ data }) => {
-                console.log('dados da consulta: ', data);
+                // console.log('dados da consulta: ', data);
                 setListaDeMensagens(data);
                 setIsLoaded(true);
             });
+
+        escutaMensagensEmTempoReal((novaMensagem) => {
+            // console.log('nova mensagem', novaMensagem);
+            // Quero reusar um valor de referencia (objeto/array)
+            // Passar uma função pro setState
+            setListaDeMensagens((valorAtualDaLista) => {
+                return [
+                    novaMensagem,
+                    ...valorAtualDaLista,
+                ]
+            });
+        });
+        
     }, []);
 
     /*
@@ -88,7 +124,7 @@ export default function PaginaDoChat() {
     function handleNovaMensagem(novaMensagem) {
         const mensagem = {
             // id: listaDeMensagens.length + 1,
-            de: usuario,
+            de: usuarioLogado,
             texto: novaMensagem,
         }
 
@@ -99,11 +135,7 @@ export default function PaginaDoChat() {
                 mensagem
             ])
             .then(({ data }) => {
-                console.log('Criando a mensagem: ', data);
-                setListaDeMensagens([
-                    data[0],
-                    ...listaDeMensagens,
-                ]);
+                // console.log('Criando a mensagem: ', data);
             })
         setMensagem('');
         setIsLoaded(true);
@@ -241,7 +273,20 @@ export default function PaginaDoChat() {
                                                 X
                                             </Box>
                                         </Box>
-                                        {mensagem.texto}
+                                        {/* Declarativo */}
+                                        {/* Condicional: {mensagem.texto.startsWith(':sticker:').toString()} */}
+                                        {mensagem.texto.startsWith(':sticker:')
+                                        ? (
+                                            <Image src={mensagem.texto.replace(':sticker:', '')} />
+                                        ) 
+                                        : (
+                                            mensagem.texto
+                                        )}
+                                        {/* if mensagem de testo possui stickers:
+                                            mostra a imagem
+                                        else
+                                            mensagem.texto */}
+                                        {/* {mensagem.texto} */}
                                     </Text>
                                 );
                             })}
@@ -279,9 +324,16 @@ export default function PaginaDoChat() {
                                     resize: 'none',
                                     borderRadius: '5px',
                                     padding: '6px 8px',
-                                    backgroundColor: appConfig.theme.colors.person.transparent_black,
+                                    backgroundColor: appConfig.theme.colors.person.black,
                                     marginRight: '12px',
                                     color: appConfig.theme.colors.person.white,
+                                }}
+                            />
+                            {/* CallBack */}
+                            <ButtonSendSticker 
+                                onStickerClick={(sticker) => {
+                                    // console.log('[USANDO O COMPONENTE] Salva esse componente no banco', sticker);
+                                    handleNovaMensagem(`:sticker: ${sticker}`);
                                 }}
                             />
                             <Button
@@ -295,8 +347,9 @@ export default function PaginaDoChat() {
 
                                 }}
                                 styleSheet={{
-                                    padding: '10px 15px',
-                                    width: '100px'
+                                    padding: '10px 10px',
+                                    width: '100px',
+                                    marginButton: '50px'
                                 }}
                                 buttonColors={{
                                     contrastColor: appConfig.theme.colors.person.black,

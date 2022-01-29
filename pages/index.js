@@ -76,7 +76,7 @@ export default function PaginaInicial() {
                             event.preventDefault();
                             if (userExiste) {
                                 appConfig.username = username;
-                                roteamento.push('/chat');
+                                roteamento.push(`/chat?username=${username}`);
                                 // window.location.href = '/chat';
                             }
                         }}
@@ -154,7 +154,7 @@ export default function PaginaInicial() {
                                         }
                                     })
                                     .catch(error => {
-                                        console.log(error)
+                                        // console.log(error)
                                         return ''
                                     })
                             }}
