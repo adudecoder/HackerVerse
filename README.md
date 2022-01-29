@@ -5,6 +5,15 @@ Projeto de discord da imersão @alura com @omariosouto e @peas
 
 [Figma com o design original do desenvolvedor da Alura](https://www.figma.com/file/X5kVg1hNCajiV73ah7iyPz/Imers%C3%A3o-React---Aluracord---Matrix?node-id=0%3A1)
 
+## Tecnologias usadas
+* [React](https://pt-br.reactjs.org/)
+* [Next.js](https://nextjs.org/)
+* [Skynexui](https://github.com/skynexui/components)
+* [Supabase](https://supabase.com/)
+* [Vercel para deploy](https://vercel.com/login?next=%2Fdashboard)
+
+![2022-01-28 22-31-12](https://user-images.githubusercontent.com/87586967/151643237-4d7eac49-2f1d-4536-96b7-d6ca835f9041.gif)
+
 ## Conteúdos e links da AULA-01
 * Customizar o Aluracord com o SEU tema, seu background do assunto favorito (Filmes, Séries, Esportes, o desenho do coração) e compartilhar com a gente!, lembre-se de usar o Coolors que indicamos nesta aula, para gerar a paleta de cores.
 * Iniciar o projeto
@@ -78,11 +87,5 @@ Projeto de discord da imersão @alura com @omariosouto e @peas
 3. [DevSoutinho - Dicas de React e Web em geral](https://www.youtube.com/playlist?list=PLTcmLKdIkOWkVld6KvLJbUCPIOjqLg9cr)
 4. [Supabase](https://supabase.com/)
 
-## Tecnologias usadas
-* [React](https://pt-br.reactjs.org/)
-* [Next.js](https://nextjs.org/)
-* [Skynexui](https://github.com/skynexui/components)
-* [Supabase](https://supabase.com/)
-* [Vercel para deploy](https://vercel.com/login?next=%2Fdashboard)
-
-![2022-01-28 22-31-12](https://user-images.githubusercontent.com/87586967/151643237-4d7eac49-2f1d-4536-96b7-d6ca835f9041.gif)
+## License/Licença do Projeto
+[MIT License](https://github.com/adudecoder/HackerVerse/blob/main/LICENSE) © [Victor Martins]()
